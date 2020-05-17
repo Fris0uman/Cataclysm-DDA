@@ -412,6 +412,14 @@
     "vision_night": 5,
     "harvest": "caff_gum_spider",
     "anger_triggers": [ "STALK", "PLAYER_WEAK", "HURT", "PLAYER_CLOSE" ],
+    "special_attacks": [
+      {
+        "type": "spell",
+        "spell_data": { "id": "caff_bite" },
+        "cooldown": 10,
+        "monster_message": "The caffeinated gum spider bites you!"
+      }
+    ],
     "death_function": [ "NORMAL" ],
     "flags": [ "SEES", "SMELLS", "HEARS", "CLIMBS", "PATH_AVOID_FIRE", "PATH_AVOID_FALL" ]
   }

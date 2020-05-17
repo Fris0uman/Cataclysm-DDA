@@ -1,0 +1,19 @@
+[
+  {
+    "id": "caff_bite",
+    "type": "SPELL",
+    "name":"Caffeine Bite",
+    "description": "Inject some caffeine into your foe's veins.",
+    "valid_targets": [ "hostile" ],
+    "flags": [ "NO_HANDS", "NO_LEGS" ],
+    "damage_type": "stab",
+    "min_damage": 5,
+    "max_damage": 10,
+    "damage_increment": 1.0,
+    "max_level": 5,
+    "min_range": 1,
+    "max_range": 1,
+    "effect": "target_attack",
+    "effect_str": "caffeinated"
+  }
+]
