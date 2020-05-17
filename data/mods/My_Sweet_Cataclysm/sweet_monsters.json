@@ -129,7 +129,15 @@
     "vision_day": 50,
     "vision_night": 4,
     "harvest": "marshmallow_boy",
-    "special_attacks": [ [ "SMASH", 20 ] ],
+    "special_attacks": [
+      [ "SMASH", 20 ],
+      {
+        "type": "spell",
+        "spell_data": { "id": "fluffy_choke" },
+        "cooldown": 10,
+        "monster_message": "The marshmallow goliath is choking you!"
+      }
+    ],
     "death_function": [ "NORMAL" ],
     "reproduction": { "baby_egg": "marshmallow", "baby_count": 10, "baby_timer": 10 },
     "flags": [

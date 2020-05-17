@@ -15,5 +15,25 @@
     "max_range": 1,
     "effect": "target_attack",
     "effect_str": "caffeinated"
+  },
+  {
+    "id": "fluffy_choke",
+    "type": "SPELL",
+    "name":"Fluffy Choke",
+    "description": "Choke your foes with sweetness.",
+    "valid_targets": [ "hostile" ],
+    "flags": [ "NO_HANDS", "NO_LEGS" ],
+    "effect": "target_attack",
+    "damage_type": "none",
+    "max_level": 10,
+    "min_range": 1,
+    "max_range": 1,
+    "min_dot": 0,
+    "max_dot": 2, 
+    "dot_increment": 0.1,
+    "min_duration": 1000,
+    "max_duration": 10000,
+    "duration_increment": 5000,
+    "effect_str": "grabbed"
   }
 ]
