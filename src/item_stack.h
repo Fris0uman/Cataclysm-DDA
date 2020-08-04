@@ -6,7 +6,7 @@
 
 #include "colony.h"
 #include "item.h" // IWYU pragma: keep
-#include "units_fwd.h"
+#include "units.h"
 
 // A wrapper class to bundle up the references needed for a caller to safely manipulate
 // items and obtain information about items at a particular map x/y location.

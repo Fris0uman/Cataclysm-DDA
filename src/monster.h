@@ -26,7 +26,7 @@
 #include "pldata.h"
 #include "point.h"
 #include "type_id.h"
-#include "units_fwd.h"
+#include "units.h"
 #include "value_ptr.h"
 
 class Character;

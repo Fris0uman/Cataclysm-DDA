@@ -41,7 +41,7 @@
 #include "string_id.h"
 #include "translations.h"
 #include "type_id.h"
-#include "units_fwd.h"
+#include "units.h"
 
 class JsonIn;
 class JsonObject;

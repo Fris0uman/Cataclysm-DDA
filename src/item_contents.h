@@ -15,7 +15,7 @@
 #include "optional.h"
 #include "ret_val.h"
 #include "type_id.h"
-#include "units_fwd.h"
+#include "units.h"
 #include "visitable.h"
 
 class Character;

@@ -9,7 +9,7 @@
 
 #include "clone_ptr.h"
 #include "type_id.h"
-#include "units_fwd.h"
+#include "units.h"
 
 class Character;
 class JsonObject;

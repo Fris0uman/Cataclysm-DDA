@@ -14,7 +14,7 @@
 #include "magic.h"
 #include "optional.h"
 #include "type_id.h"
-#include "units_fwd.h"
+#include "units.h"
 
 class Character;
 class Creature;

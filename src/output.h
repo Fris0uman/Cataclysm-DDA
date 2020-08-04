@@ -24,7 +24,7 @@
 #include "point.h"
 #include "string_formatter.h"
 #include "translations.h"
-#include "units_fwd.h"
+#include "units.h"
 
 struct input_event;
 

@@ -4,7 +4,7 @@
 
 #include "optional.h"
 #include "point.h"
-#include "units_fwd.h"
+#include "units.h"
 
 class aim_activity_actor;
 class avatar;
