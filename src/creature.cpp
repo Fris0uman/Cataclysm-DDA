@@ -146,7 +146,6 @@ void Creature::reset_bonuses()
     cut_mult = 1.0f;
 
     melee_quiet = false;
-    grab_resist = 0;
     throw_resist = 0;
 }
 
@@ -257,6 +256,9 @@ bool Creature::sees( const Creature &critter ) const
                     break;
                 case creature_size::huge:
                     size_modifier = 0.15f;
+                    break;
+                case creature_size::num_sizes:
+                    debugmsg( "ERROR: Creature has invalid size class." );
                     break;
             }
             const int vision_modifier = 30 - 0.5 * coverage * size_modifier;
@@ -483,6 +485,9 @@ int Creature::size_melee_penalty() const
             return -10;
         case creature_size::huge:
             return -20;
+        case creature_size::num_sizes:
+            debugmsg( "ERROR: Creature has invalid size class." );
+            return 0;
     }
 
     debugmsg( "Invalid target size %d", get_size() );
@@ -1861,10 +1866,6 @@ bool Creature::get_melee_quiet() const
 {
     return melee_quiet;
 }
-int Creature::get_grab_resist() const
-{
-    return grab_resist;
-}
 
 int Creature::get_throw_resist() const
 {
@@ -1986,10 +1987,6 @@ void Creature::set_cut_mult( float ncutmult )
 void Creature::set_melee_quiet( bool nquiet )
 {
     melee_quiet = nquiet;
-}
-void Creature::set_grab_resist( int ngrabres )
-{
-    grab_resist = ngrabres;
 }
 void Creature::set_throw_resist( int nthrowres )
 {

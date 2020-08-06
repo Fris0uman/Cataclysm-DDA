@@ -10,7 +10,6 @@
 #include <string>
 #include <utility>
 
-#include "anatomy.h"
 #include "bodypart.h"
 #include "damage.h"
 #include "location.h"
@@ -32,6 +31,7 @@ namespace catacurses
 {
 class window;
 } // namespace catacurses
+class anatomy;
 class avatar;
 class Character;
 class field;
@@ -52,6 +52,8 @@ struct dealt_projectile_attack;
 struct pathfinding_settings;
 struct trap;
 
+using anatomy_id = string_id<anatomy>;
+
 enum class creature_size : int {
     // Keep it starting at 1 - damage done to monsters depends on it
     // Squirrel
@@ -63,7 +65,9 @@ enum class creature_size : int {
     // Cow
     large,
     // TAAAANK
-    huge
+    huge,
+    // must always be at the end, is actually number + 1 since we start counting at 1
+    num_sizes
 };
 
 using I = std::underlying_type_t<creature_size>;
@@ -680,7 +684,6 @@ class Creature : public location, public viewer
         virtual float get_cut_mult() const;
 
         virtual bool get_melee_quiet() const;
-        virtual int get_grab_resist() const;
         virtual bool has_grab_break_tec() const = 0;
         virtual int get_throw_resist() const;
 
@@ -718,7 +721,6 @@ class Creature : public location, public viewer
         virtual void set_cut_mult( float ncutmult );
 
         virtual void set_melee_quiet( bool nquiet );
-        virtual void set_grab_resist( int ngrabres );
         virtual void set_throw_resist( int nthrowres );
 
         virtual units::mass weight_capacity() const;
@@ -994,7 +996,6 @@ class Creature : public location, public viewer
         float cut_mult = 0.0f;
         bool melee_quiet = false;
 
-        int grab_resist = 0;
         int throw_resist = 0;
 
         bool fake = false;
