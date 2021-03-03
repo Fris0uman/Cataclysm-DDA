@@ -262,15 +262,15 @@ void Character::mutation_reflex_trigger( const trait_id &mut )
     }
 
     if( activate && !has_active_mutation( mut ) ) {
-        activate_mutation( mut );
         if( !msg_on.first.empty() ) {
             add_msg_if_player( msg_on.second, msg_on.first );
         }
+        activate_mutation( mut );
     } else if( !activate && has_active_mutation( mut ) ) {
-        deactivate_mutation( mut );
         if( !msg_off.first.empty() ) {
             add_msg_if_player( msg_off.second, msg_off.first );
         }
+        deactivate_mutation( mut );
     }
 }
 
