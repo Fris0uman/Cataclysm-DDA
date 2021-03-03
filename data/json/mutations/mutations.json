@@ -127,14 +127,12 @@
           "trigger_type": "MOOD",
           "threshold_high": -50,
           "msg_on": { "text": "Everything is terrible and this makes you so ANGRY!", "rating": "mixed" }
-        }
-      ],
-      [
+        },
         {
           "trigger_type": "TIME",
           "threshold_low": 21,
           "threshold_high": 6,
-          "msg_on": { "text": "Everything is terrible and this makes you so ANGRY!", "rating": "mixed" }
+          "msg_on": { "text": "Night is upon you and you start to feel weird...", "rating": "mixed" }
         }
       ]
     ],
