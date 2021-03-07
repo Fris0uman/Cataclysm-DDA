@@ -413,3 +413,141 @@ TEST_CASE( "The various type of triggers work", "[mutations]" )
     }
 
 }
+
+
+static bool is_trigger_list_true( const std::vector<std::vector<reflex_activation_data>> &list,
+                                  const Character &dummy )
+{
+    bool activate = false;
+    for( const std::vector<reflex_activation_data> &vect_rdata : list ) {
+        activate = false;
+        // OR conditions: if any trigger is true then this condition is true
+        for( const reflex_activation_data &rdata : vect_rdata ) {
+            if( rdata.is_trigger_true( dummy ) ) {
+                activate = true;
+                break;
+            }
+        }
+        // AND conditions: if any OR condition is false then this is false
+        if( !activate ) {
+            break;
+        }
+    }
+
+    return activate;
+}
+
+static void make_trigger_list_true( const std::vector<std::vector<reflex_activation_data>> &list,
+                                    Character &dummy )
+{
+    bool activate = false;
+    for( const std::vector<reflex_activation_data> &vect_rdata : list ) {
+        activate = false;
+        // OR conditions: if any trigger is true then this condition is true
+        for( const reflex_activation_data &rdata : vect_rdata ) {
+
+            std::default_random_engine generator;
+            std::uniform_int_distribution<int> distribution( rdata.threshold_low, rdata.threshold_high );
+
+            int var = 0;
+            int i = 0;
+            if( rdata.threshold_low < rdata.threshold_high ) {
+                while( !( var < rdata.threshold_high &&
+                          var > rdata.threshold_low ) ) {
+                    var = distribution( generator );
+                }
+            } else {
+                while( !( var < rdata.threshold_high ||
+                          var > rdata.threshold_low ) ) {
+                    var = distribution( generator );
+                }
+            }
+
+            switch( rdata.trigger ) {
+                case PAIN:
+                    dummy.set_pain( var );
+                    break;
+                case HUNGER:
+                    dummy.set_hunger( var );
+                    break;
+                case THRIST:
+                    dummy.set_thirst( var );
+                    break;
+                case MOOD:
+                    dummy.add_morale( morale_type( "morale_perm_debug" ), var );
+                    dummy.apply_persistent_morale();
+                    break;
+                case STAMINA:
+                    dummy.set_stamina( var );
+                    break;
+                case MOON:
+                    switch( var ) {
+                        case MOON_NEW:
+                            calendar::turn = calendar::turn_zero;
+                            break;
+                        case MOON_WAXING_CRESCENT:
+                            calendar::turn = calendar::turn_zero + 2_days;
+                            break;
+                        case MOON_HALF_MOON_WAXING:
+                            calendar::turn = calendar::turn_zero + 6_days;
+                            break;
+                        case MOON_WAXING_GIBBOUS:
+                            calendar::turn = calendar::turn_zero + 10_days;
+                            break;
+                        case MOON_FULL:
+                            calendar::turn = calendar::turn_zero + 13_days;
+                            break;
+                        case  MOON_WANING_GIBBOUS:
+                            calendar::turn = calendar::turn_zero + 17_days;
+                            break;
+                        case  MOON_HALF_MOON_WANING:
+                            calendar::turn = calendar::turn_zero + 21_days;
+                            break;
+                        case  MOON_WANING_CRESCENT:
+                            calendar::turn = calendar::turn_zero + 24_days;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case TIME:
+                    calendar::turn = calendar::turn + time_duration::from_hours( var );
+                    break;
+                default:
+                    debugmsg( "Invalid trigger" );
+                    break;
+            }
+            break;
+        }
+    }
+}
+
+TEST_CASE( "Triggerable mutations are setup properly", "[mutations]" )
+{
+    Character &dummy = get_player_character();
+
+    for( const auto &mdata : mutation_branch::get_all() ) {
+        const auto &mid = mdata.id;
+
+        const std::vector<std::vector<reflex_activation_data>> &list_of_triggers = mid->trigger_list;
+        if( list_of_triggers.empty() ) {
+            continue;
+        }
+
+        if( !mid->transform || !mid->transform->target->trigger_list.empty() ) {
+            //If the target mutation has no trigger or there's no target mutation then there's nothing to check
+            continue;
+        }
+        clear_avatar();
+        calendar::turn = calendar::turn_zero;
+
+        WHEN( "The mutation is triggered" ) {
+            make_trigger_list_true( list_of_triggers, dummy );
+            INFO( "Trigger list is : " << is_trigger_list_true( list_of_triggers, dummy ) );
+            THEN( "The target mutation is not triggered" ) {
+                CHECK( !is_trigger_list_true( mid->transform->target->trigger_list, dummy ) );
+            }
+        }
+    }
+
+}
