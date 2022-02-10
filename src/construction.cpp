@@ -1346,6 +1346,7 @@ void construct::done_appliance( const tripoint &p )
 {
     map &here = get_map();
     vehicle *veh = here.add_vehicle( vehicle_prototype_none, p, 270_degrees, 0, 0 );
+
     if( !veh ) {
         debugmsg( "error constructing vehicle" );
         return;
