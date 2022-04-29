@@ -115,7 +115,7 @@ jobs:
             sound: 0
           - name: Windows Tiles Sounds x64
             mxe: x86_64
-            artifact: windows-tiles-x64
+            artifact: windows-tiles-sounds-x64
             os: ubuntu-latest
             ext: zip
             content: application/zip
@@ -129,7 +129,7 @@ jobs:
             sound: 0
           - name: Windows Tiles Sounds x32
             mxe: i686
-            artifact: windows-tiles-x32
+            artifact: windows-tiles-sounds-x32
             os: ubuntu-latest
             ext: zip
             content: application/zip
@@ -149,7 +149,7 @@ jobs:
             android: none
             tiles: 1
             sound: 1
-            artifact: linux-tiles-x64
+            artifact: linux-tiles-sounds-x64
             ext: tar.gz
             content: application/gzip
           - name: linux-curses-x64
@@ -182,7 +182,7 @@ jobs:
             mxe: none
             tiles: 1
             sound: 1
-            artifact: osx-tiles-x64
+            artifact: osx-tiles-sounds-x64
             ext: dmg
             content: application/x-apple-diskimage
           - name: Android x64
