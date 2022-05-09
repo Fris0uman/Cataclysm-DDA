@@ -3,7 +3,7 @@ concurrency: release
 on:
   push:
     branches:
-      - master
+      - tileset_test
     paths:
       - '.github/workflows/release.yml'
       - 'android/**'
